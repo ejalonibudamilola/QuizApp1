@@ -1,11 +1,15 @@
 package com.example.android.quizapp;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,54 +28,59 @@ public class MainActivity extends AppCompatActivity {
         CheckBox two =(CheckBox) findViewById(R.id.two);
         boolean isTwo = two.isChecked();
 
-        CheckBox three =(CheckBox) findViewById(R.id.two);
+        CheckBox three =(CheckBox) findViewById(R.id.three);
         boolean isThree = three.isChecked();
 
-        RadioButton five = (RadioButton) findViewById(R.id.one);
+        RadioButton four = (RadioButton) findViewById(R.id.four);
+        boolean isFour = four.isChecked();
+
+        CheckBox five = (CheckBox) findViewById(R.id.five);
         boolean isFive = five.isChecked();
 
-        RadioButton six = (RadioButton) findViewById(R.id.one);
-        boolean isSix = six.isChecked();
+        EditText six = (EditText) findViewById(R.id.six);
+        String sixs = six.getText().toString();
+        sixs = sixs.toLowerCase();
 
-        int totalScore = calculateScore(isOne, isTwo, isThree, isFive, isSix);
+        EditText seven = (EditText) findViewById(R.id.seven);
+        String sevens = seven.getText().toString();
+        sevens = sevens.toLowerCase();
 
-        String grading = "Your total score is: "+totalScore +" out of 5";
+        int totalScore = calculateScore(isOne, isTwo, isThree, isFour, isFive, sixs,sevens);
+
+        String grading = "Your total score is: "+totalScore +" out of 7";
         displayMessage(grading);
 
     }
 
-    private int calculateScore (boolean one, boolean two, boolean three, boolean five, boolean six){
+    private int calculateScore (boolean one, boolean two, boolean three, boolean four, boolean five, String six, String seven){
+        String check1 = "continent";
+        String check2 = "bible";
         int score =0;
 
         if(one){
             score=score+1;
         }
-        else{
-            score = score+0;
-        }
+
         if(two){
             score=score+1;
-       }
-        else{
-            score = score+0;
         }
+
         if(three){
             score=score+1;
         }
-        else{
-            score = score+0;
-        }
-        if(five){
+
+        if(four){
             score=score+1;
         }
-        else{
-            score = score+0;
-        }
-       if(six){
+
+       if(five){
             score=score+1;
-        }
-       else{
-           score = score+0;
+       }
+       if(six.equals(check1) ){
+           score=score+1;
+       }
+       if(seven.equals(check2)){
+           score=score+1;
        }
 
         return score;
